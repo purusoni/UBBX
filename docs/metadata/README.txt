@@ -15,5 +15,6 @@ Off-chain book metadata (UBBX)
 
 - GitHub Pages: commit metadata/*.json in the repo branch Pages serves. Then in the DApp,
   set "Metadata files base URL" to the public folder URL with trailing slash, e.g.
-  https://YOURUSER.github.io/YOURREPO/UBBXDapp/src/metadata/
+  https://YOURUSER.github.io/YOURREPO/metadata/
+  (with GitHub Pages from /docs, or your custom domain + /metadata/)
   so the app loads https://.../metadata/7.json for listing 7.
