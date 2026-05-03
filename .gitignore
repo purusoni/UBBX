@@ -1,0 +1,42 @@
+# Secrets & environment
+.env
+.env.*
+!.env.example
+
+# Dependencies (if you add a JS toolchain at repo root)
+node_modules/
+
+# Build & compiler output (Hardhat / Foundry / Remix local)
+artifacts/
+cache/
+out/
+broadcast/
+typechain/
+typechain-types/
+coverage/
+dist/
+build/
+.tmp/
+
+# Logs & debug
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / local-only
+.idea/
+.vscode/
+*.swp
+*~
+.cursor/
+
+# Scratch & backups (not for publication)
+*.backup
+*.bak
+
+# Professor reference repos — clone separately; not part of this project site
+cse426/
+Cse406Demo/

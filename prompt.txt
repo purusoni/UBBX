@@ -1,0 +1,324 @@
+This project is mostly done, said the professor to me when I showed it to her. But she said that I need to move the heavy stuff off-chain. I do not know how to do that. Use more or less only the knowldege I tell you about.
+@contracts/UBBX.sol 
+===
+
+
+Term Project 2026: Decentralized Marketplace: Building a
+Web3 Economy on Ethereum Version 1
+Copyright 2026 Bina Ramamurthy
+February 2, 2026
+Abstract
+This project challenges students to design, develop, and deploy a decentralized autonomous
+marketplace on the Ethereum Sepolia testnet. The platform will enable users to buy and sell prod-
+ucts and services in a peer-to-peer web3 environment, with all transactions secured and recorded on
+the blockchain. Participants will create and list their own products or services—anything that can
+be delivered safely, securely, and legally. The entire class community, including students, instruc-
+tor, TA, and volunteer staff, will participate in this functioning economy, transacting with each
+other as both buyers and sellers. The marketplace will operate using a custom currency system
+built on fungible tokens. Our monetary unit, the Yoda token, will serve as the medium of exchange
+for all purchases and peer-to-peer transfers within the platform. Beyond building the marketplace,
+students will analyze system performance by measuring transaction throughput (transaction rate)
+and average transaction fees. This hands-on experience will provide practical insight into the
+capabilities and constraints of decentralized applications. The project culminates in a working au-
+tonomous marketplace where participants can freely join and leave, with the Ethereum blockchain
+serving as the trust layer that enables decentralized commerce and digital self-sovereignty.
+1 Problem Definition
+Figure 1 presents a use case diagram: a standard tool for defining a system’s problem statement at a
+high level. Five actors interact with YodaMart, the decentralized peer-to-peer marketplace (feel free
+to choose a different name for your implementation). These five roles are:
+• Role 1: Treasurer or the monetary system manager The treasurer funds the project with
+a limited amount of money (value) in the form of tokens called Yoda, a fungible token (FT).
+• Role 2: Project Manager and Assistant Treasurer The Treasurer establishes and funds
+the marketplace economy with a limited supply of Yoda tokens, the platform’s fungible token
+(FT) currency.
+• Role 3: Decentralized Participants Participants form the core community of the market-
+place. They receive an initial allocation of Yodas from the Treasurer and periodic incentive
+distributions from the Project Manager. From this base role, two specialized roles emerge:
+– Seller (specialized participant role): Sellers define products, services, and digital assets.
+Each seller develops a web interface where buyers can connect their wallets and purchase
+listed products. A seller will support a web interface for participants to connect their wallets
+and purchase the products they sell.
+– Buyer (specialized participant role): Buyers connect to seller interfaces, browse available
+products, and complete purchases by transferring the required Yodas to the seller.
+1.1 Limitations
+Each seller is limited to a single product line or genre, though they may sell multiple items within that
+category. For example, a seller offering artwork can sell numbered editions of that piece but cannot
+expand into other product types; they cannot sell artwork and fresh vegetables (haha), for example.
+1
+Figure 1: Use Case Diagram for Decentralized World Market: YodaMart
+This constraint keeps the focus on the web3 system architecture rather than on building complex
+inventory management.
+Products can be anything of value to participants: physical objects, services, collectibles, or in-
+tangible digital goods. Sellers must be able to deliver their products to buyers through appropriate
+means: electronically, by mail, or in person.
+2 Scenario and Operational Details
+The following steps describe the operation of the YodaMart platform.
+1. Yoda Deployment: Bina deploys the Yoda fungible token (FT) with a total supply of 1,000,000
+Yodas.
+2. Initial Distribution: Bina grants 250,000 Yodas to TA Jakir as a grant to distribute to the
+students as rewards for various activities.
+3. Participant Onboarding: Students join the platform by connecting their wallets and receive
+an initial allocation of 10,000 Yodas each.
+4. Product Definition: Each team selects a single product to design and develop as a digital asset
+for sale. Products should be realistic, useful, and desirable to other participants and potential
+buyers outside the class. Teams advertise their products on their web interface.
+5. Production: Each team creates multiple instances of their assets and lists them for sale at a
+base price (e.g., 100 chickens at 20 Yodas each).
+6. Purchase Process: Buyers visit a seller’s web interface, connect their wallet, and transfer the
+required Yodas to purchase items offered.
+7. Item Transfer: Upon payment, the seller transfers a unique product item (asset) instance to
+the buyer.
+8. Incentive Activities: Periodically, Bina or TA Jakir will post activities or contests with Yoda
+rewards. These may be on-chain or off-chain tasks. Teams or individuals who complete them
+earn additional Yodas.
+9. Marketplace Launch: Once a team’s product and web interface are ready, they can advertise
+on Piazza for the class community to browse and buy.
+2
+10. Ongoing Operations: Steps 6–9 repeat throughout the semester as the marketplace economy
+evolves.
+11. Performance Analysis: After the experiment concludes, teams extract transaction data from
+Sepolia to assess performance metrics: number of transactions, average transaction fees, through-
+put, and other relevant measures.
+2.1 Tokenization of Assets and Products
+Ethereum provides standard protocols for tokenizing assets: ERC-20 for fungible tokens and ERC-721
+for non-fungible tokens. We will use the ERC-20 token standard to implement the Yoda currency
+(FT) and, optionally, the ERC-721 standard to implement the digital assets representing each team’s
+product.
+2.2 Idea Requirements
+Here are some idea requirements:
+1. Useful to Society: Your fellow students are your primary customers—design something valu-
+able to your community.
+2. Transferable and Tradeable: The asset should be sellable or exchanged for cryptocurrencies.
+3. Self-Sovereign Ownership: Like an automobile or a plane ticket, the owner has full control—self-
+owned, self-managed, and independent of intermediaries.
+4. Complex Off-Chain Data: The asset may represent a complex object with data stored off-
+chain, as on-chain storage is limited.
+5. Any Domain: Products can span any field—mathematics, chemistry, physics, automotive, real
+estate, services, finance, healthcare, astronomy, space, civil engineering, education, social science,
+sports, medicine, culture, politics, music, travel, employment, and beyond.
+3 Milestones
+It is a good practice to develop the project incrementally and thoroughly test it before moving on to
+the next stage.
+Table 1: Roadmap and Milestones
+Week of To Do /Milestone
+2/10 Form team and register team; Read description.
+2/17 Research and decide on a product. Discuss with Bina or Jakir. On approval,
+register the product and provide a short description.
+2/24 Obtain your share of Yoda token from the YodaMartplatform. Start designing
+your product line and the web page for displaying your products and the blockchain
+stack with your smart contract logic.
+3/3, 3/10 Deploy product web page and test its function within your team. Start a simple
+marketing and sales webpage for your product.
+3/23 Spring Break: Catch up on everything
+3/31 Finalize webpage, product deployment, etc.
+4/7 Mid-project one-on-one check with the TAs for grade
+4/14 Market your product, buy, sell, and evaluate performance.
+4/27 Deadline for project submission.
+5/5 In-person Project Demo to the TA. Documentation and a short video submis-
+sion.
+3
+4 Performance Metrics
+One of the performance metrics is to evaluate the degree of engagement of a decentralized participant.
+Some of the performance metrics include (i) popularity of the product, (ii) code organization, tech-
+niques and tools for deployment, (iii) ease and intuitiveness of user interaction, (iv) number of Txs
+sent and received, (v) average transaction fee, (vi) Tx rate, (vii) others we will discuss as the project
+evolves.
+5 Grading Rubric
+Item Points Proof Notes
+Received Yoda 5 Screenshot of wallet Tx on Sepolia
+Product Idea 5 Discussion Range 1-5
+Creativity, Originality, Cool 10 Document Range 1-10
+Basic Product design and Deploy 10 Range On Sepolia
+Transacting with Yodas 15 Range Local VM
+Full Development and Testing 20 Range Sepolia
+Marketing web page function etc. 15 UI Front end Selling UI
+Perf. Metrics: Num. Transactions, compute average fees etc. 10 On Sepolia No dummy Txs.
+Documentation with User Instructions, Demo 10 PDF, video range 0-10
+Total 100 Demo of project reqd.
+6 Submission Details
+6.1 Code Base
+Submit the code base for the complete project that includes the code used for ERC-20 (FT) and other
+smart contracts used, the front-end parts (do not submit node modules), and the design of the
+user interface. All submissions are on Ublearns at designated links.
+6.2 Documentation
+Design and development details and how to run the code should be included.
+6.3 Demo video
+A simple demo video showing the operation of your project deployment and execution.
+7 Project Outcomes
+On completion of this project, students will be able to:
+• Understand the structure of a decentralized application (DApp) and interact with it using cryp-
+tocurrency and digital assets.
+• Design and develop a DApp that deals with tokens as the currency of exchange.
+• Design and develop a Dapp for (digital) assets representing products and deploy it on a blockchain-
+based infrastructure.
+• Develop decentralized applications that interact with cryptocurrency wallets, fungible tokens
+(FT), and non-fungible tokens (NFT).
+• Design and deploy smart contracts on the Ethereum test network by invoking its functions.
+• Create a web interface to interact with the web3 infrastructure.
+• Work on decentralized applications for the Ethereum blockchain ecosystem.
+4
+8 Some Thoughts
+Following are some random thoughts on how I will approach the development of this project.
+The manager (Bina in our project) has to deploy the Yoda smart contract (ERC-20, FT) for a
+million tokens. Provide a simple interface (such as I’M HERE) to transfer or provide an allowance
+for every student in the class. On request via REQUEST ALLOWANCE button on a DApp. Each
+student gets 10000 Yoda tokens. They can view it in their wallet after receiving it. They will have to
+import it using the smart contract address of the Yoda token. She will also provide 250,000 Yodas to
+TA for his discretionary distribution to students.
+Students (Teams) work to understand how to create a tradable from their product. A team has only
+one product, n (supply) of the same type of product available for sale. The product will be represented
+as an asset with all its properties. Every product item should have a unique product identifier
+number.
+With the currency (Yoda) for exchange and the product as an asset in place, you can now execute
+transactions using DApp interfaces for buying and selling. A buyer should transfer the price of the
+product in Yoda to the seller on their (seller’s) interface, and in response, the seller transfers the product
+to the buyer and displays a message with the product number that has been transferred.
+Accessing the smart contract for FT requires their address and ABI. We will use the Web3 API to
+link the front end and the smart contract.
+The smart contract codes for FT (ERC-20 and the suite of contracts) are available as a standard
+and can be used.
+Develop your ideas one at a time; FT Operations first, then define the product and its sell interface,
+and its special characteristics, etc.
+Test each stage of your project development on the local VM environment before proceeding to
+testnet Sepolia.
+The Blockchain in Action book has many code examples.
+What are some of the development environments and tools that I will need? Solidity for smart con-
+tract coding, Remix environment – local environment, Metamask wallet with enough Sepolia, knowl-
+edge of web3 API to develop the web part of the DApp, and others.
+If you are in a team of two, you test your buy/sell operations with the other team members.
+5
+
+
+====
+
+Usase instructions for AI:
+
+Which resources are we limited to using for the project
+Updated 2 days ago by Anonymous Comp
+So far my teammate and I have been focusing only on what has been provided in the lecture slide and the textbook. Are there any other online resources we can use for our project?
+
+Which resources would not violate AI?
+
+0
+17 views
+Students' Answer
+Where students collectively construct a single answer
+
+Instructors' Answer
+Updated 1 day ago by Bina Ramamurthy
+You can use libraries such as OpenZepplin.
+
+You can use AI, but clearly state and document: 1. Which tools you used, 2. What prompts, 3. What resources? Which parts were AI gerneated?
+
+And You cannot copy somebody else's or make somebody else work for you on the project.
+
+
+
+====
+
+You must document your work, as AI work documentaionis required.
+
+
+===
+
+This the somehwat of an overview of what all is covered in the class relating to this. Do not go too far beyond.
+8
+View as TextDownload
+Automatic Zoom
+Bina Ramamurthy. Copyright 2020
+On-chain data
+ The blockchain header (6A) stores the attributes of
+the block.
+ Transactions (6B) store the details of the Txs recorded
+in the block.
+ Receipts (6C) store the execution results of Txs
+recorded in the block. Every transaction has a receipt;
+the 1:1 relationship in figure 6.2 depicts this fact.
+ A composite global state (6D) stores all the data
+values or current state of the smart contract accounts
+and other regular accounts on the blockchain and is
+updated when Txs that use them are confirmed.
+On-chain or Onchain?
+• English dictionary say it is on-chain.
+• But blockchain technologists say it is onchain!
+Bina Ramamurthy. Copyright 2020
+Bina Ramamurthy. Copyright 2020
+Blind auction with events
+Bina Ramamurthy. Copyright 2020
+Blind auction with events
+• What are events?
+• How do you define them?
+• How do you invoke?
+• Where are they “stored”? How do you access emitted
+events?
+• How do you utilize the emitted events /notifications? For
+further analytics, computation and announcements?
+Bina Ramamurthy. Copyright 2020
+On-chain events
+• Block header, Txs, receipts, and state storage— form the majority of the
+on-chain data.
+• This data plays a significant role in ensuring the robustness and security
+of the blockchain, and also provides proof of existence for transactions and
+events.
+• You can access the information stored on the blockchain to support
+operations at the application level.
+• The kinds of on-chain data are strictly controlled by the blockchain
+protocol, with the actual data values being determined by the Txs
+originating from the applications. You must be aware of this limitation
+when designing your blockchain-based systems.
+• To illustrate these concepts, we’ll explore an improved version of the blind
+auction application.
+• But before that let’s understand “Events”
+Bina Ramamurthy. Copyright 2020
+Events?
+Let’s begin by considering the following:
+ What an event is
+ How to define an event
+ How to emit an event
+ How to use event logs in the Tx receipts to provide
+notifications to the user via the UI
+Bina Ramamurthy. Copyright 2020
+What are events?
+• Events are notifications that can be emitted from
+functions to indicate the presence of a condition or flag
+during a smart contract function’s execution.
+• Solidity provides features to define and emit an event
+with and without parameters.
+• Events are logged on-chain, in the receipt tree, and can
+be accessed by their names.
+• Of course, events represent application-specific
+“events” or “situations” that may need participants
+attention and actions.
+Bina Ramamurthy. Copyright 2020
+How to define an event?
+• Here is the syntax for an event definition:
+event NameOfEvent (parameters);
+• Event names in Solidity begin with an uppercase letter and then use camel case.
+There can be three parameters at most.
+• This limitation is set by Solidity to avoid overloading the chain and to enable efficient
+management of the event logs. Here’s an example of an event definition for the blind
+auction smart contract introduced in chapter 5:
+event AuctionEnded(address winner, uint highestBid);
+• You can also define events without any parameters by specifying them for different
+phases of the blind auction (here, Bidding and Reveal):
+event BiddingStarted();
+event RevealStarted();
+Bina Ramamurthy. Copyright 2020
+Where do you define an event in an
+SC?
+• You can define an event anywhere in the smart contract
+code before you use it.
+• Still, it’s a good idea to set aside a standard location to
+define the events in your design and coding so that they
+can be easily identified during the development and
+code review process.
+• You can define events in the smart contract right after
+the type and variable declarations.
+
+===
+
+Think of what would change.
+
+
+====
+

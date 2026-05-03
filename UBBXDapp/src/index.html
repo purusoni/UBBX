@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UBBX | UB Book Exchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <style>
+    :root {
+      --nyse-navy: #0d2137;
+      --nyse-navy-mid: #152d45;
+      --nyse-navy-deep: #081420;
+      --nyse-blue: #0066b3;
+      --nyse-gold: #c5a059;
+      --nyse-bg: #f0f2f5;
+      --nyse-panel: #ffffff;
+      --nyse-border: #d4dbe3;
+      --nyse-text: #1c1c1c;
+      --nyse-muted: #5a6570;
+      --nyse-row-alt: #f7f9fb;
+      --nyse-positive: #0d7a2d;
+      --nyse-negative: #b00020;
+    }
+
+    body {
+      font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--nyse-text);
+      background: var(--nyse-bg);
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nyse-topbar {
+      background: linear-gradient(180deg, var(--nyse-navy) 0%, var(--nyse-navy-deep) 100%);
+      color: #fff;
+      border-bottom: 3px solid var(--nyse-gold);
+    }
+
+    .nyse-topbar-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .nyse-mark {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .nyse-mark h1 {
+      font-family: "Libre Baskerville", Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin: 0;
+      color: #fff;
+    }
+
+    .nyse-mark span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    .nyse-top-actions .btn {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      padding: 0.4rem 0.9rem;
+    }
+
+    .btn-nyse-primary {
+      background: var(--nyse-blue);
+      border: 1px solid #005a9e;
+      color: #fff;
+    }
+
+    .btn-nyse-primary:hover {
+      background: #005a9e;
+      color: #fff;
+    }
+
+    .btn-nyse-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.55);
+      color: #fff;
+    }
+
+    .btn-nyse-outline:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .nyse-subbar {
+      background: #fff;
+      border-bottom: 1px solid var(--nyse-border);
+      font-size: 0.8rem;
+      color: var(--nyse-muted);
+    }
+
+    .nyse-subbar-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0.5rem 1.25rem;
+    }
+
+    .nyse-wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .nyse-hero {
+      background: var(--nyse-panel);
+      border: 1px solid var(--nyse-border);
+      border-left: 4px solid var(--nyse-navy);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .nyse-hero h2 {
+      font-family: "Libre Baskerville", Georgia, serif;
+      font-size: 1.5rem;
+      margin: 0 0 0.35rem 0;
+      color: var(--nyse-navy);
+    }
+
+    .nyse-hero p {
+      margin: 0;
+      color: var(--nyse-muted);
+      font-size: 0.9rem;
+      max-width: 52rem;
+    }
+
+    .nyse-panel {
+      background: var(--nyse-panel);
+      border: 1px solid var(--nyse-border);
+      margin-bottom: 1rem;
+      border-radius: 0;
+    }
+
+    .nyse-panel-h {
+      background: var(--nyse-row-alt);
+      border-bottom: 1px solid var(--nyse-border);
+      padding: 0.55rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--nyse-navy);
+    }
+
+    .nyse-panel-b {
+      padding: 1rem;
+    }
+
+    .nyse-section-title {
+      font-family: "Libre Baskerville", Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--nyse-navy);
+      margin-bottom: 0.35rem;
+    }
+
+    .nyse-section-sub {
+      font-size: 0.8rem;
+      color: var(--nyse-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .nyse-quote-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      background: #fff;
+      border: 1px solid var(--nyse-border);
+    }
+
+    .nyse-quote-table thead th {
+      background: var(--nyse-navy);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      white-space: nowrap;
+    }
+
+    .nyse-quote-table tbody td {
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--nyse-border);
+      vertical-align: top;
+    }
+
+    .nyse-quote-table tbody tr:nth-child(4n+1),
+    .nyse-quote-table tbody tr:nth-child(4n+2) {
+      background: #fff;
+    }
+
+    .nyse-quote-table tbody tr:nth-child(4n+3),
+    .nyse-quote-table tbody tr:nth-child(4n+4) {
+      background: var(--nyse-row-alt);
+    }
+
+    .nyse-quote-table .nyse-detail-row td {
+      font-size: 0.8rem;
+      color: var(--nyse-muted);
+      padding-top: 0.4rem;
+      padding-bottom: 0.85rem;
+    }
+
+    .nyse-ticker {
+      font-weight: 700;
+      color: var(--nyse-blue);
+      letter-spacing: 0.02em;
+    }
+
+    .nyse-last {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nyse-status-open {
+      color: var(--nyse-positive);
+      font-weight: 600;
+    }
+
+    .nyse-status-closed {
+      color: var(--nyse-muted);
+      font-weight: 600;
+    }
+
+    .nyse-addr {
+      font-size: 0.72rem;
+      font-family: ui-monospace, monospace;
+      word-break: break-all;
+    }
+
+    .nyse-footnote {
+      font-size: 0.72rem;
+      color: var(--nyse-muted);
+      margin-top: 0.75rem;
+      padding: 0.65rem 0.75rem;
+      background: var(--nyse-row-alt);
+      border: 1px solid var(--nyse-border);
+    }
+
+    .form-control {
+      border-radius: 2px;
+      border-color: #c5cdd6;
+      font-size: 0.9rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--nyse-navy);
+      box-shadow: 0 0 0 0.15rem rgba(13, 33, 55, 0.15);
+    }
+
+    label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--nyse-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .btn-nyse-trade {
+      background: var(--nyse-navy);
+      color: #fff;
+      border: 1px solid var(--nyse-navy-deep);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
+
+    .btn-nyse-trade:hover {
+      background: var(--nyse-navy-mid);
+      color: #fff;
+    }
+
+    .btn-nyse-secondary {
+      background: #fff;
+      color: var(--nyse-navy);
+      border: 1px solid var(--nyse-border);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
+
+    .btn-nyse-warn {
+      background: #8a6d3b;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
+
+    .btn-nyse-danger {
+      background: var(--nyse-negative);
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
+
+    #toast-container > div {
+      opacity: 1;
+      border-radius: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .ubbx-listings {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .ubbx-card {
+      background: #fff;
+      border: 1px solid var(--nyse-border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .ubbx-card-media {
+      height: 140px;
+      background: var(--nyse-row-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .ubbx-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ubbx-card-media-placeholder {
+      color: var(--nyse-muted);
+      font-size: 0.85rem;
+      padding: 1rem;
+      text-align: center;
+    }
+    .ubbx-card-body {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .ubbx-card-title {
+      font-family: "Libre Baskerville", Georgia, serif;
+      font-size: 1.1rem;
+      margin: 0 0 0.25rem 0;
+      color: var(--nyse-navy);
+      line-height: 1.3;
+    }
+    .ubbx-card-author {
+      margin: 0 0 0.5rem 0;
+      color: var(--nyse-muted);
+      font-size: 0.9rem;
+    }
+    .ubbx-card-line {
+      font-size: 0.85rem;
+      margin: 0 0 0.35rem 0;
+      color: var(--nyse-text);
+    }
+    .ubbx-card-contact {
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+      word-break: break-word;
+    }
+    .ubbx-card-contact strong { color: var(--nyse-navy); }
+    .ubbx-card-footer {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--nyse-border);
+    }
+    .ubbx-card-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-size: 0.88rem;
+      margin-bottom: 0.5rem;
+    }
+    .ubbx-card-stats .ubbx-price {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--nyse-navy);
+    }
+    .ubbx-chain-hint {
+      font-size: 0.72rem;
+      color: var(--nyse-muted);
+      margin-bottom: 0.5rem;
+    }
+    .btn-ubbx-select {
+      width: 100%;
+      background: var(--nyse-navy);
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .btn-ubbx-select:hover { background: var(--nyse-navy-mid); color: #fff; }
+    .btn-ubbx-select:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .ubbx-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.45rem;
+      border-radius: 2px;
+    }
+    .ubbx-badge-verified { background: #e3f4e6; color: var(--nyse-positive); }
+    .ubbx-badge-warn { background: #fff3cd; color: #856404; }
+    .ubbx-badge-sold { background: #e9ecef; color: var(--nyse-muted); }
+  </style>
+</head>
+<body>
+  <header class="nyse-topbar">
+    <div class="nyse-topbar-inner">
+      <div class="nyse-mark">
+        <h1>UBBX</h1>
+        <span>UB Book Exchange</span>
+      </div>
+      <div class="nyse-top-actions">
+        <button type="button" class="btn btn-nyse-outline" id="refreshBtn">Refresh listings</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nyse-subbar">
+    <div class="nyse-subbar-inner">
+      <span id="walletStatus">Not connected</span>
+    </div>
+  </div>
+
+  <div class="nyse-wrap">
+    <div class="nyse-hero">
+      <h2>Buy and sell course books with Yoda</h2>
+      <p>
+        Connect a wallet, list a book, or buy one. Prices settle in <strong>Yoda</strong> tokens; full book details load from this site’s catalog files.
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="nyse-panel">
+          <div class="nyse-panel-h">Wallet</div>
+          <div class="nyse-panel-b">
+            <button type="button" class="btn btn-nyse-primary btn-sm btn-block mb-3" id="connectBtn">Connect wallet</button>
+            <p class="small text-muted mb-1">Yoda balance</p>
+            <p class="h5 mb-0" style="font-variant-numeric: tabular-nums;" id="yodaBalance">—</p>
+          </div>
+        </div>
+
+        <div class="nyse-panel">
+          <div class="nyse-panel-h">Sell a book</div>
+          <div class="nyse-panel-b">
+            <div class="form-group mb-2">
+              <label for="inIsbn">ISBN</label>
+              <input type="text" class="form-control form-control-sm" id="inIsbn" placeholder="9780134092669">
+            </div>
+            <div class="form-group mb-2">
+              <label for="inPrice">Price (whole Yoda)</label>
+              <input type="number" class="form-control form-control-sm" id="inPrice" min="1" value="10" step="1">
+            </div>
+            <div class="form-group mb-2">
+              <label for="inCondition">Condition</label>
+              <select class="form-control form-control-sm" id="inCondition">
+                <option value="0">Acceptable</option>
+                <option value="1">Good</option>
+                <option value="2">Very Good</option>
+                <option value="3">Like New</option>
+              </select>
+            </div>
+            <hr class="my-3">
+            <p class="small font-weight-bold text-uppercase mb-2" style="font-size:0.65rem;letter-spacing:0.08em;color:var(--nyse-navy);">Book details (shown in the table)</p>
+            <div class="form-group mb-2">
+              <label for="metaTitle">Title</label>
+              <input type="text" class="form-control form-control-sm" id="metaTitle" placeholder="Title">
+            </div>
+            <div class="form-group mb-2">
+              <label for="metaAuthor">Author</label>
+              <input type="text" class="form-control form-control-sm" id="metaAuthor" placeholder="Author">
+            </div>
+            <div class="form-group mb-2">
+              <label for="metaEdition">Edition</label>
+              <input type="text" class="form-control form-control-sm" id="metaEdition" placeholder="Edition">
+            </div>
+            <div class="form-group mb-2">
+              <label for="metaNotes">Pickup / notes</label>
+              <textarea class="form-control form-control-sm" id="metaNotes" rows="2" placeholder="Location"></textarea>
+            </div>
+            <div class="form-group mb-2">
+              <label for="metaImage">Image URL</label>
+              <input type="text" class="form-control form-control-sm" id="metaImage" placeholder="https://">
+            </div>
+            <div class="form-group mb-2">
+              <label for="metaContact">Contact</label>
+              <input type="text" class="form-control form-control-sm" id="metaContact" placeholder="Email">
+            </div>
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="anchorHash">
+              <label class="form-check-label small" for="anchorHash">Verify catalog entry (on-chain fingerprint)</label>
+            </div>
+            <button type="button" class="btn btn-nyse-trade btn-sm btn-block" id="listBtn">List for sale</button>
+          </div>
+        </div>
+
+        <div class="nyse-panel">
+          <div class="nyse-panel-h">Buy</div>
+          <div class="nyse-panel-b">
+            <div class="form-group mb-2">
+              <label for="buyId">Book (listing number)</label>
+              <input type="number" class="form-control form-control-sm" id="buyId" min="1" placeholder="Choose a book below">
+            </div>
+            <button type="button" class="btn btn-nyse-danger btn-sm btn-block" id="buyBtn">Buy with Yoda</button>
+            <p class="small text-muted mt-2 mb-0">Use <strong>Select this book</strong> on a card to fill this in.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="d-flex align-items-baseline justify-content-between flex-wrap">
+          <div>
+            <div class="nyse-section-title">Books for sale</div>
+            <p class="nyse-section-sub mb-0">Details load from each listing’s catalog file. <strong>Refresh listings</strong> after new files are added.</p>
+          </div>
+        </div>
+        <div id="listingsContainer" class="ubbx-listings" aria-live="polite">
+        </div>
+        <p class="nyse-footnote mb-0">
+          In-person pickup or delivery is arranged between buyer and seller. UBBX records the sale and payment on the blockchain only.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.2.0/dist/ethers.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
