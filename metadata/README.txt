@@ -13,8 +13,5 @@ Off-chain book metadata (UBBX)
 
 - Local: keep this folder next to index.html so ./metadata/7.json works.
 
-- GitHub Pages: commit metadata/*.json in the repo branch Pages serves. Then in the DApp,
-  set "Metadata files base URL" to the public folder URL with trailing slash, e.g.
-  https://YOURUSER.github.io/YOURREPO/metadata/
-  (with GitHub Pages from /docs, or your custom domain + /metadata/)
-  so the app loads https://.../metadata/7.json for listing 7.
+- GitHub Pages (site from repo root): commit metadata/*.json here. Default ./metadata/ in app.js
+  loads https://YOURDOMAIN/metadata/7.json (e.g. https://ubbx.purusoni.com/metadata/7.json).
