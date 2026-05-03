@@ -37,6 +37,14 @@ Thumbs.db
 *.backup
 *.bak
 
+# LaTeX (documentation/UBBX_term_project.tex)
+documentation/*.aux
+documentation/*.out
+documentation/*.toc
+documentation/*.synctex.gz
+documentation/*.fdb_latexmk
+documentation/*.fls
+
 # Professor reference repos — clone separately; not part of this project site
 cse426/
 Cse406Demo/

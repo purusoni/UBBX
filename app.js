@@ -223,15 +223,6 @@ class App {
 
             if (anchor && canonical) {
                 this.downloadText(canonical, "metadata-" + idStr + ".json", null);
-                toastr.info(
-                    "From repo root: node scripts/write-metadata.mjs " +
-                        idStr +
-                        " path/to/metadata-" +
-                        idStr +
-                        ".json",
-                    "Publish catalog file",
-                    { timeOut: 18000 }
-                );
             }
             await this.loadListings();
         } catch (e) {
